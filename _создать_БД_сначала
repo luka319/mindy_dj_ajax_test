@@ -1,0 +1,15 @@
+﻿
+mysql> create user 'Mindy'@'localhost' identified by 'qazwsx';
+
+mysql> create database mindy_test;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use mindy_test;
+Database changed
+mysql>
+
+
+mysql> grant all privileges on mindy_test.* to 'Mindy'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+
