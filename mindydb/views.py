@@ -52,6 +52,38 @@ def insert_into(request):
         # Make sure data is committed to the database
         models.cnx.commit()
 
+        # # ======================================================
+        # models.cursor.close()
+        # print("\n cursor.close() ---> !!")
+        # # ======================================================
+        # models.cnx.close()
+        # print("\n закрыл соединениё --> DIS connect к БД --> !!")
+        #
+        # return HttpResponse(f"Записал в базу: <h2> {login=} <br> {name=} <br>\
+        #                     {surname=} <br> {date_of_birth=} <br> </h2>")
+
+        #============================================
+        # select
+        query = ("SELECT id, login, name, surname, date_of_birth FROM users ")
+        #         "WHERE hire_date BETWEEN %s AND %s")
+
+        # cursor.execute(query, (hire_start, hire_end))
+        models.cursor.execute(query)
+
+        cursor = models.cursor
+        cursor_list = []
+        print("id |login   |name   |surname   |date_of_birth ")
+        print("==============================================")
+        for (id, login, name, surname, date_of_birth) in cursor:
+            print(f"{id} |{login} |{name} |{surname} |{date_of_birth}")
+            cursor_list.append([id,login,name,surname,date_of_birth])
+        # print(f"{cursor=}")
+        print(f"{cursor_list=}")
+        # print(f"{type(cursor)=}")
+        # ===========================================================
+        # Make sure data is committed to the database
+        # cnx.commit()
+
         # ======================================================
         models.cursor.close()
         print("\n cursor.close() ---> !!")
@@ -60,5 +92,6 @@ def insert_into(request):
         print("\n закрыл соединениё --> DIS connect к БД --> !!")
 
         return HttpResponse(f"Записал в базу: <h2> {login=} <br> {name=} <br>\
-                            {surname=} <br> {date_of_birth=} <br> </h2>")
-
+                                     {surname=} <br> {date_of_birth=} <br> \
+                            {cursor_list=} <br> \
+                            </h2>")
