@@ -3,6 +3,7 @@
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
+
 from django.views import View
 
 context = {}
@@ -91,7 +92,10 @@ def insert_into(request):
         models.cnx.close()
         print("\n закрыл соединениё --> DIS connect к БД --> !!")
 
-        return HttpResponse(f"Записал в базу: <h2> {login=} <br> {name=} <br>\
-                                     {surname=} <br> {date_of_birth=} <br> \
-                            {cursor_list=} <br> \
-                            </h2>")
+        # return HttpResponse(f"Записал в базу: <h2> {login=} <br> {name=} <br>\
+        #                              {surname=} <br> {date_of_birth=} <br> \
+        #                     {cursor_list=} <br> \
+        #                     </h2>")
+
+        return render(request, 'db_output.html', { 'login': login, 'cursor_list':cursor_list})
+        # return render_to_response('db_output.html', cursor_list=c_list)
